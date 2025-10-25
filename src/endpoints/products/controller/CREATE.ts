@@ -1,6 +1,6 @@
 import { D1CreateEndpoint, O } from "chanfana";
-import { HandleArgs } from "../../types";
-import { ProductModel } from "./base";
+import { HandleArgs } from "../../../types";
+import { ProductModel } from "../../../schemas/schemaProducts";
 
 export class ProductCreate extends D1CreateEndpoint<HandleArgs> {
   _meta = {
@@ -17,6 +17,7 @@ export class ProductCreate extends D1CreateEndpoint<HandleArgs> {
 
   before(data: O<typeof this.meta>): Promise<O<typeof this.meta>> {
     data.slug = data.name.toLowerCase().replace(/\s+/g, "-");
+    data.id = crypto.randomUUID();
     return Promise.resolve(data);
   }
 }

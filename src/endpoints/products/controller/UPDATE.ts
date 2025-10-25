@@ -1,6 +1,6 @@
 import { D1UpdateEndpoint, O, UpdateFilters } from "chanfana";
-import { HandleArgs } from "../../types";
-import { ProductModel } from "./base";
+import { HandleArgs } from "../../../types";
+import { ProductModel } from "../../../schemas/schemaProducts";
 
 export class ProductUpdate extends D1UpdateEndpoint<HandleArgs> {
   _meta = {

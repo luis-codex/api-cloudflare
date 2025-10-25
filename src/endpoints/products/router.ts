@@ -1,12 +1,15 @@
+import { D1DeleteEndpoint, fromHono } from "chanfana";
 import { Hono } from "hono";
-import { fromHono } from "chanfana";
-import { ProductList } from "./productList";
-import { ProductCreate } from "./productCreate";
-import { ProductRead } from "./productRead";
-import { ProductUpdate } from "./productUpdate";
-import { ProductDelete } from "./productDelete";
+import { ProductModel } from "../../schemas/schemaProducts";
+import { HandleArgs } from "../../types";
+import { ProductCreate } from "./controller/CREATE";
+import { ProductList, ProductRead, ProductUpdate } from "./controller";
 
 export const productsRouter = fromHono(new Hono());
+
+class ProductDelete extends D1DeleteEndpoint<HandleArgs> {
+	_meta = { model: ProductModel };
+}
 
 productsRouter.get("/", ProductList);
 productsRouter.post("/", ProductCreate);

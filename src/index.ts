@@ -2,6 +2,7 @@ import { ApiException, fromHono } from "chanfana";
 import { Hono } from "hono";
 import { ContentfulStatusCode } from "hono/utils/http-status";
 import { productsRouter } from "./endpoints/products/router";
+import { suppliersRouter } from "./endpoints/suppliers/router";
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -36,5 +37,6 @@ const openapi = fromHono(app, {
 });
 
 openapi.route("/products", productsRouter);
+openapi.route("/suppliers", suppliersRouter);
 
 export default app;
