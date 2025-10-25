@@ -28,7 +28,7 @@ app.onError((err, c) => {
 });
 
 const openapi = fromHono(app, {
-  docs_url: "/docs",
+  docs_url: "/",
   schema: {
     info: {
       title: "My Awesome API",

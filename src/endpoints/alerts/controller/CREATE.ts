@@ -12,25 +12,21 @@ export class AlertCreate extends D1CreateEndpoint<HandleArgs> {
         severity: true,
         status: true,
         message: true,
-        triggeredAt: true,
-        resolvedAt: true,
         assignedTo: true,
       })
       .partial({
         productId: true,
-        triggeredAt: true,
-        resolvedAt: true,
         assignedTo: true,
       }),
   };
 
   before(data: O<typeof this.meta>): Promise<O<typeof this.meta>> {
     const now = new Date().toISOString();
-    data.triggeredAt ??= now;
+    data.triggeredAt = now;
     const status = data.status?.toLowerCase();
     if (status === "resolved") {
-      data.resolvedAt ??= data.triggeredAt;
-    } else if (data.resolvedAt === undefined) {
+      data.resolvedAt = data.triggeredAt;
+    } else {
       data.resolvedAt = null;
     }
     return Promise.resolve(data);

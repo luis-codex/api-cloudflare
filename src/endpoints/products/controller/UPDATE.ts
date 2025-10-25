@@ -19,7 +19,11 @@ export class ProductUpdate extends D1UpdateEndpoint<HandleArgs> {
     oldObj: O<typeof this.meta>,
     filters: UpdateFilters
   ): Promise<UpdateFilters> {
-    oldObj.slug = oldObj.name.toLowerCase().replace(/\s+/g, "-");
+    const newName = filters.updatedData?.name;
+    if (typeof newName === "string") {
+      const slug = newName.toLowerCase().replace(/\s+/g, "-");
+      filters.updatedData.slug = slug;
+    }
     return Promise.resolve(filters);
   }
 }

@@ -14,7 +14,6 @@ export class OrderUpdate extends D1UpdateEndpoint<HandleArgs> {
         requestedBy: true,
         notes: true,
         expectedArrival: true,
-        updatedAt: true,
       })
       .partial(),
   };

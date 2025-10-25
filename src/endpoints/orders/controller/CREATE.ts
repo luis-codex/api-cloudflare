@@ -14,22 +14,21 @@ export class OrderCreate extends D1CreateEndpoint<HandleArgs> {
         requestedBy: true,
         notes: true,
         expectedArrival: true,
-        createdAt: true,
-        updatedAt: true,
       })
       .partial({
         notes: true,
         expectedArrival: true,
-        createdAt: true,
-        updatedAt: true,
       }),
   };
 
   before(data: O<typeof this.meta>): Promise<O<typeof this.meta>> {
     const now = new Date().toISOString();
-    data.createdAt ??= now;
-    data.updatedAt ??= now;
+    data.createdAt = now;
+    data.updatedAt = now;
     data.notes ??= "";
+    if (data.expectedArrival === undefined) {
+      data.expectedArrival = null;
+    }
     return Promise.resolve(data);
   }
 }

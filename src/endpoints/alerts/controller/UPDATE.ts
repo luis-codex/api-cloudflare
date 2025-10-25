@@ -12,7 +12,6 @@ export class AlertUpdate extends D1UpdateEndpoint<HandleArgs> {
         severity: true,
         status: true,
         message: true,
-        resolvedAt: true,
         assignedTo: true,
       })
       .partial(),
@@ -20,11 +19,14 @@ export class AlertUpdate extends D1UpdateEndpoint<HandleArgs> {
 
   before(oldObj: O<typeof this.meta>, filters: UpdateFilters): Promise<UpdateFilters> {
     filters.updatedData ??= {};
+    const hasStatusUpdate = typeof filters.updatedData.status === "string";
     const status = (filters.updatedData.status ?? oldObj.status)?.toLowerCase();
-    if (status === "resolved" && filters.updatedData.resolvedAt === undefined) {
-      filters.updatedData.resolvedAt = new Date().toISOString();
-    } else if (filters.updatedData.status && status !== "resolved" && filters.updatedData.resolvedAt === undefined) {
-      filters.updatedData.resolvedAt = null;
+    if (hasStatusUpdate) {
+      if (status === "resolved") {
+        filters.updatedData.resolvedAt = new Date().toISOString();
+      } else {
+        filters.updatedData.resolvedAt = null;
+      }
     }
     return Promise.resolve(filters);
   }
