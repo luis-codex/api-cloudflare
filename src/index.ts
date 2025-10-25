@@ -1,6 +1,8 @@
 import { ApiException, fromHono } from "chanfana";
 import { Hono } from "hono";
 import { ContentfulStatusCode } from "hono/utils/http-status";
+import { alertsRouter } from "./endpoints/alerts/router";
+import { ordersRouter } from "./endpoints/orders/router";
 import { productsRouter } from "./endpoints/products/router";
 import { suppliersRouter } from "./endpoints/suppliers/router";
 
@@ -26,7 +28,7 @@ app.onError((err, c) => {
 });
 
 const openapi = fromHono(app, {
-  docs_url: "/",
+  docs_url: "/docs",
   schema: {
     info: {
       title: "My Awesome API",
@@ -38,5 +40,7 @@ const openapi = fromHono(app, {
 
 openapi.route("/products", productsRouter);
 openapi.route("/suppliers", suppliersRouter);
+openapi.route("/orders", ordersRouter);
+openapi.route("/alerts", alertsRouter);
 
 export default app;
