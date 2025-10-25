@@ -6,7 +6,6 @@ export class SupplierList extends D1ListEndpoint<HandleArgs> {
   _meta = {
     model: SupplierModel,
   };
-  dbName = "SUPPLIERS_DB";
   searchFields = ["name", "rut", "email", "address"];
   defaultOrderBy = "id DESC";
 }
