@@ -7,7 +7,6 @@ export class ProductUpdate extends D1UpdateEndpoint<HandleArgs> {
     model: ProductModel,
     fields: ProductModel.schema.pick({
       name: true,
-      slug: true,
       description: true,
       price: true,
       stock: true,
