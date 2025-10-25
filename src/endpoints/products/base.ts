@@ -15,14 +15,5 @@ export const ProductModel = {
   tableName: "products",
   primaryKeys: ["id"],
   schema: product,
-  serializer: (obj: Object) => {
-    const o = obj as unknown as z.infer<typeof product>;
-    return {
-      ...o,
-      price: Number(o.price),
-      stock: Number(o.stock),
-      slug: o.name.toLowerCase().replace(/\s+/g, "-"),
-    };
-  },
   serializerObject: product,
 };
