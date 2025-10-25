@@ -24,7 +24,7 @@
 		"seedLocalDb": "wrangler d1 migrations apply DB --local",
 		"schema": "npx chanfana",
 		"test": "wrangler deploy --dry-run && npx vitest run --config tests/vitest.config.mts",
-		"migrate": "wrangler d1 migrations apply openapi-template-db --local"
+		"migrate": "wrangler d1 migrations create DB 001"
 	},
 	"dependencies": {
 		"chanfana": "2.8.1",
